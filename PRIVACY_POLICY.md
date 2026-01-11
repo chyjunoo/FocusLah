@@ -1,6 +1,6 @@
 # Privacy Policy for FocusLah
 
-**Effective Date:** January 8, 2026
+**Effective Date:** January 11, 2026
 
 ## Introduction
 
@@ -20,9 +20,10 @@ FocusLah stores all user data locally on your device. We collect and store:
 
 The app uses internet connectivity for the following features:
 
+- **Quote API**: The app fetches motivational quotes from Quotable.io API (a free, public quotes API)
 - **RSS Feed Fetching**: The app downloads motivational quotes and productivity articles from public RSS feeds
-- These RSS feeds are fetched from third-party websites (like Zen Habits, BrainyQuote)
-- No personal data is sent to these websites
+- These feeds are fetched from third-party websites (like Zen Habits, Lifehack, James Clear, Cal Newport)
+- No personal data is sent to these websites or APIs
 - The app only reads publicly available content
 
 ### Information We DO NOT Collect
@@ -55,15 +56,16 @@ Our app does not knowingly collect any information from children. The app is sui
 
 The app requests the following permissions:
 
-- **INTERNET**: To fetch motivational quotes and productivity articles from RSS feeds
-- **ACCESS_NETWORK_STATE**: To check if internet is available before attempting to fetch RSS feeds
+- **INTERNET**: To fetch motivational quotes and productivity articles from RSS feeds and APIs
+- **ACCESS_NETWORK_STATE**: To check if internet is available before attempting to fetch content
 - **POST_NOTIFICATIONS**: To send you notifications when timer sessions complete (optional - you can disable notifications in device settings)
+- **VIBRATE**: To provide haptic feedback when timer sessions complete
 
 ### Offline Functionality
 
 - The app works completely offline for core features (tasks, timer, local quotes)
-- Internet is only required for fetching fresh RSS feed content
-- If no internet is available, the app uses locally stored quotes
+- Internet is only required for fetching fresh RSS feed content and quotes from external APIs
+- If no internet is available, the app uses locally stored quotes and works perfectly offline
 
 ## Changes to This Privacy Policy
 
@@ -81,7 +83,7 @@ Or by uninstalling the app.
 ## Contact Us
 
 If you have any questions about this Privacy Policy, please contact us at:
-[focuslah.team@gmail.com]
+focuslah.team@gmail.com
 
 ## Your Rights
 
@@ -91,17 +93,24 @@ Since we do not collect, store, or process any personal data on our servers, the
 
 ### RSS Feed Sources
 
-The app fetches content from public RSS feeds, including:
-- BrainyQuote (motivational quotes)
+The app fetches content from the following sources:
+
+**Quote API:**
+- Quotable.io API (quotable.io) - Free, public motivational quotes API
+
+**RSS Feeds:**
 - Zen Habits (productivity articles)
 - Lifehack (productivity tips)
-- Pick the Brain (self-improvement content)
+- James Clear (habits and productivity)
+- Cal Newport (deep work and focus)
+- Pick the Brain (self-improvement)
+- And other curated productivity blogs
 
-These are publicly available RSS feeds. When the app fetches content:
+These are publicly available sources. When the app fetches content:
 - No personal data is transmitted
 - No tracking cookies are used
 - Only publicly available content is retrieved
-- The app acts as a standard RSS reader
+- The app acts as a standard RSS reader and API client
 
 ### No Analytics or Tracking
 
