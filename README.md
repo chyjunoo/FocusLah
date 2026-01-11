@@ -1,5 +1,7 @@
 # FocusLah
 
+Effective Date: January 11, 2026
+
 A beautiful and modern Android productivity application that combines task management, adjustable Pomodoro timer, motivational quotes from APIs, and curated productivity articles to help you stay focused and motivated.
 
 **Latest Version:** 1.0.0  
