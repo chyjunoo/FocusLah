@@ -1,66 +1,86 @@
 # FocusLah
-FocusLah is a productivity application designed to help users manage their time effectively and stay inspired throughout the workday. By combining execution tools with motivational resources, it serves as a complete mental workspace.
-A beautiful and modern Android productivity application that combines task management, Pomodoro timer, and daily motivational quotes to help you stay focused and motivated.
 
+A beautiful and modern Android productivity application that combines task management, adjustable Pomodoro timer, motivational quotes from APIs, and curated productivity articles to help you stay focused and motivated.
+
+**Latest Version:** 1.0.0  
+**Target SDK:** 35 (Android 15)  
+**Minimum SDK:** 24 (Android 7.0+)
 
 ## Features
 
 ### 📋 Task Management
 - Create, complete, and delete tasks
-- Set task priorities (High, Medium, Low)
-- Visual priority indicators
+- Set task priorities (HIGH, MID, LOW)
+- Visual priority badges with color coding
+- Smart sorting (incomplete first, then by priority)
+- Modern card-based UI with Material Design 3
 - Clean and intuitive interface
 
-### ⏰ Pomodoro Timer
-- Focus sessions (25 minutes)
-- Short breaks (5 minutes)
-- Long breaks (15 minutes)
+### ⏰ Adjustable Pomodoro Timer
+- **Fully customizable timer duration**
+- +/- buttons to adjust time in 1-minute increments
+- Keyboard input for precise time entry
+- Focus and Break modes
 - Automatic session tracking
-- Beautiful circular timer visualization
-- Session counter
+- Beautiful circular timer with gradient progress
+- Timer completion notifications with vibration
+- Session counter with stats card
+- "Start Leh" and "Stop Pls" buttons (with personality!)
 
-### 💡 Motivational Quotes (with RSS Feed Support!)
-- **NEW: Fresh quotes from RSS feeds**
-- Automatic fetching from BrainyQuote and other sources
-- Daily motivational quotes
+### 💡 Motivational Quotes (API-Powered!)
+- **Primary: Quotable.io API** (100,000+ verified quotes)
+- Automatic fetching from famous people only
+- No "Unknown" authors - all quotes from verified sources
+- RSS feed fallback for additional variety
+- 50+ curated local quotes (offline fallback)
 - Random quote generator
-- 30+ local quotes (offline fallback)
 - Share quotes with friends
-- Beautiful card-based UI with RSS indicators
+- Beautiful card-based UI with online/offline indicators
+- HTML entity decoding for perfect text display
 
-### 📰 Productivity Articles (NEW!)
-- **Brand new Articles tab**
-- Fetch articles from Zen Habits, Lifehack, and Pick the Brain
-- Browse latest productivity tips and self-improvement content
+### 📰 Productivity Articles
+- **Curated from 10+ premium productivity blogs**
+- Sources: James Clear, Cal Newport, Zen Habits, Lifehack, and more
+- English-only content with quality filtering
+- Author diversity (max 3 articles per author)
+- HTML entity decoding for clean text
 - Tap to read full articles in browser
 - Refresh to get latest content
+- Modern card-based layout
 
 ### ⚙️ Settings
-- App information
-- Privacy policy
+- In-app Privacy Policy dialog (scrollable, comprehensive)
+- About dialog with app information
 - Share app functionality
-- Clean settings interface
+- Modern blue & white Material Design 3 theme
+- Clean, organized settings interface
 
 ## Technology Stack
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose
 - **Architecture**: MVVM (Model-View-ViewModel)
-- **Networking**: Retrofit + OkHttp (for RSS feeds)
-- **XML Parsing**: SimpleXML Converter
-- **Minimum SDK**: 24 (Android 7.0)
-- **Target SDK**: 34 (Android 14)
+- **Networking**: Retrofit + OkHttp
+- **APIs**: Quotable.io for quotes
+- **XML Parsing**: SimpleXML Converter (RSS feeds)
+- **JSON Parsing**: Gson (API responses)
+- **Minimum SDK**: 24 (Android 7.0+)
+- **Target SDK**: 35 (Android 15)
 - **Material Design**: Material Design 3
+- **Build Tools**: Gradle 8.5+, ProGuard/R8
 
 ## Key Libraries
 
-- Jetpack Compose - Modern UI toolkit
-- Compose Navigation - Navigation between screens
-- ViewModel - Lifecycle-aware state management
-- Kotlin Coroutines & Flow - Asynchronous programming
-- Retrofit + OkHttp - RSS feed fetching and networking
-- SimpleXML - RSS/XML parsing
-- Material Design 3 - Beautiful, modern UI components
+- **Jetpack Compose** - Modern declarative UI toolkit
+- **Compose Navigation** - Type-safe navigation between screens
+- **ViewModel & LiveData** - Lifecycle-aware state management
+- **Kotlin Coroutines & Flow** - Asynchronous programming
+- **Retrofit 2.9.0** - Type-safe HTTP client
+- **OkHttp 4.12.0** - HTTP client with logging interceptor
+- **SimpleXML** - RSS/XML feed parsing
+- **Gson 2.10.1** - JSON parsing for API responses
+- **Material Design 3** - Beautiful, modern UI components
+- **Android Notifications** - Timer completion alerts with vibration
 
 ## Project Structure
 
@@ -68,25 +88,53 @@ A beautiful and modern Android productivity application that combines task manag
 app/
 ├── src/main/
 │   ├── java/com/motivate/productivity/
-│   │   ├── data/              # Data models
+│   │   ├── api/                    # API integrations
+│   │   │   ├── ApiConfig.kt
+│   │   │   ├── ApiResponse.kt
+│   │   │   ├── BaseApiService.kt
+│   │   │   └── QuotesApi.kt
+│   │   ├── data/                   # Data models
 │   │   │   ├── Task.kt
 │   │   │   ├── Quote.kt
+│   │   │   ├── Article.kt
+│   │   │   ├── RssFeed.kt
 │   │   │   └── TimerState.kt
-│   │   ├── viewmodel/         # ViewModels
+│   │   ├── viewmodel/              # ViewModels
 │   │   │   ├── TaskViewModel.kt
 │   │   │   ├── TimerViewModel.kt
-│   │   │   └── QuoteViewModel.kt
+│   │   │   ├── QuoteViewModel.kt
+│   │   │   └── ArticlesViewModel.kt
+│   │   ├── repository/             # Data repositories
+│   │   │   └── RssFeedRepository.kt
+│   │   ├── network/                # Network configuration
+│   │   │   ├── RetrofitClient.kt
+│   │   │   └── RssService.kt
+│   │   ├── notification/           # Notifications
+│   │   │   └── TimerNotificationHelper.kt
 │   │   ├── ui/
-│   │   │   ├── screens/       # Compose screens
+│   │   │   ├── screens/            # Compose screens
+│   │   │   │   ├── SplashScreen.kt
 │   │   │   │   ├── TasksScreen.kt
 │   │   │   │   ├── TimerScreen.kt
 │   │   │   │   ├── QuotesScreen.kt
+│   │   │   │   ├── ArticlesScreen.kt
 │   │   │   │   └── SettingsScreen.kt
-│   │   │   └── theme/         # Theme & styling
-│   │   ├── navigation/        # Navigation
-│   │   └── MainActivity.kt    # Entry point
-│   └── res/                   # Resources
-└── build.gradle.kts           # Build configuration
+│   │   │   └── theme/              # Theme & styling
+│   │   │       ├── Theme.kt
+│   │   │       ├── Color.kt
+│   │   │       └── Shape.kt
+│   │   ├── navigation/             # Navigation
+│   │   │   └── Screen.kt
+│   │   └── MainActivity.kt         # Entry point
+│   ├── res/                        # Resources
+│   │   ├── values/
+│   │   │   ├── strings.xml
+│   │   │   ├── colors.xml
+│   │   │   └── themes.xml
+│   │   └── mipmap-*/               # App icons
+│   └── AndroidManifest.xml
+├── build.gradle.kts                # Build configuration
+└── proguard-rules.pro              # ProGuard rules for release
 ```
 
 ## Getting Started
@@ -95,7 +143,8 @@ app/
 
 - Android Studio Hedgehog (2023.1.1) or newer
 - JDK 8 or higher
-- Android SDK with API level 34
+- Android SDK with API level 35 (Android 15)
+- Gradle 8.5 or higher
 
 ### Installation
 
@@ -138,15 +187,17 @@ This app is designed to be fully compliant with Google Play Store policies:
 - ✅ Transparent permission usage
 
 ### Permissions
-- `INTERNET` - For fetching RSS feeds (quotes and articles)
+- `INTERNET` - For fetching quotes from APIs and RSS feeds
 - `ACCESS_NETWORK_STATE` - To check connectivity before fetching
 - `POST_NOTIFICATIONS` - For timer completion notifications (optional)
+- `VIBRATE` - For haptic feedback when timer completes
 
 ### Offline Mode
 - ✅ Works completely offline for core features
 - ✅ Tasks and timer work without internet
-- ✅ 30+ local quotes available offline
-- ✅ RSS feeds only need internet for fresh content
+- ✅ 50+ local quotes available offline (famous people only)
+- ✅ APIs and RSS feeds only need internet for fresh content
+- ✅ Graceful degradation when offline
 
 ### Content Rating
 - Suitable for all ages
@@ -154,9 +205,11 @@ This app is designed to be fully compliant with Google Play Store policies:
 - Educational and productivity-focused
 
 ### Security
-- ✅ ProGuard enabled for release builds
+- ✅ ProGuard/R8 enabled for release builds with comprehensive rules
 - ✅ No sensitive data transmission
 - ✅ Secure local data storage
+- ✅ HTTPS for all network requests
+- ✅ Cleartext traffic support for HTTP RSS feeds
 
 ## Publishing to Play Store
 
@@ -213,28 +266,42 @@ android {
 
 ## Recent Updates
 
-### Version 1.0.1 (Latest)
-- ✨ **NEW**: RSS feed integration for quotes
-- ✨ **NEW**: Productivity Articles tab
-- 🌐 Fetch fresh motivational content from the web
-- 📱 Smart offline mode with local fallback
-- 🎨 RSS status indicators in UI
-- 🔒 Privacy-focused implementation
+### Version 1.0.0 (Latest - January 2026)
+- ✨ **NEW**: Quotable.io API integration for quotes (100,000+ quotes)
+- ✨ **NEW**: Productivity Articles tab with 10+ curated sources
+- ✨ **NEW**: Adjustable Pomodoro timer (customizable duration)
+- ✨ **NEW**: Timer notifications with vibration
+- ✨ **NEW**: Animated splash screen
+- ✨ **NEW**: In-app Privacy Policy dialog
+- 🎨 **UI Redesign**: Modern blue & white Material Design 3 theme
+- 🎨 Card-based layouts throughout
+- 🔧 HTML entity decoding for perfect text display
+- 🔧 English-only article filtering
+- 🔧 Author diversity in articles (max 3 per author)
+- 🔧 Famous people quotes only (no "Unknown" authors)
+- 🔧 Smart priority sorting for tasks (HIGH > MID > LOW)
+- 🔧 ProGuard rules for release builds
+- 🌐 API 35 (Android 15) support
+- 📱 Smart offline mode with multi-layer fallback
+- 🔒 Privacy-focused implementation (no tracking, no analytics)
 
 ## Future Enhancements
 
 Potential features for future versions:
+- ✅ ~~Custom timer durations~~ (Implemented!)
+- ✅ ~~Timer notifications~~ (Implemented!)
+- ✅ ~~API integration for quotes~~ (Implemented!)
 - User-configurable RSS feeds in settings
 - Task categories/tags
 - Task due dates and reminders
-- Custom timer durations
 - Save favorite articles
 - Offline article caching
-- Statistics and analytics
+- Statistics and productivity analytics
 - Dark/light theme toggle
 - Data export/import
 - Widget support
-- Notification customization
+- Notification sound customization
+- Cloud backup (optional)
 
 ## Contributing
 
@@ -247,15 +314,54 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For support, questions, or feedback, please contact:
-- Email: [Your email]
+- Email: focuslah.team@gmail.com
 - GitHub Issues: [Your repository URL]
 
 ## Acknowledgments
 
-- Motivational quotes compiled from various public domain sources
+- **Quotable.io** - Free quotes API with 100,000+ verified quotes
+- **RSS Feed Sources**: James Clear, Cal Newport, Zen Habits, Lifehack, and more
+- Motivational quotes from famous historical figures and thought leaders
 - Icons from Material Design Icons
 - UI inspired by Material Design 3 guidelines
+- Built with Jetpack Compose and modern Android development practices
+
+## Key Features Highlights
+
+### 🎨 Modern UI/UX
+- Beautiful blue & white color scheme
+- Card-based layouts with elevation
+- Circular progress indicators
+- Gradient backgrounds
+- Smooth animations
+- Material Design 3 components
+
+### 🔒 Privacy-First
+- No user tracking
+- No analytics
+- No ads
+- All data stored locally
+- Transparent data handling
+- Open source
+
+### ⚡ Performance
+- ProGuard optimized release builds
+- Efficient network requests
+- Smart caching
+- Minimal battery usage
+- Fast startup time
+- Responsive UI
+
+### 🌐 Network Features
+- Quotable.io API integration
+- RSS feed parsing
+- HTML entity decoding
+- Graceful error handling
+- Offline fallback
+- Auto-retry on failure
 
 ---
 
 **Made with ❤️ using Jetpack Compose**
+
+**FocusLah** - Stay focused, stay motivated! 🚀
