@@ -20,7 +20,6 @@ A beautiful and modern Android productivity application that combines task manag
 
 ### ⏰ Adjustable Pomodoro Timer
 - **Fully customizable timer duration**
-- +/- buttons to adjust time in 1-minute increments
 - Keyboard input for precise time entry
 - Focus and Break modes
 - Automatic session tracking
